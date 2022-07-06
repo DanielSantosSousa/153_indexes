@@ -25,8 +25,8 @@ END;
 go
 
 --2 Indexes Erstellen/Löschen--
+DROP INDEX IF EXISTS title_index ON Movies
 CREATE INDEX title_index ON Movies (Title);
-
 --3 Indexes dauer beurteilen
 
 GO         
