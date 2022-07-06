@@ -17,9 +17,9 @@ create table Movies(
 	Title varchar(50)
 );
 DECLARE @cnt INT = 0;
-WHILE @cnt < 100000
+WHILE @cnt < 1000000
 BEGIN
-   insert into Movies (Title) values (concat('Movie', str(@cnt)));
+   insert into Movies (Title) values (TRIM(str(@cnt)));
    SET @cnt = @cnt + 1;
 END;
 go
@@ -34,14 +34,15 @@ SET STATISTICS TIME ON;
 GO  
 SELECT * 
 FROM Movies
-WHERE Title = 'Movie12345';
-GO  
+WHERE Title = '423456';
+GO 
 SET STATISTICS TIME OFF;  
 GO
 /* Mann sieht bei Messages die Dauer*/
 --4 Vergleich indexes bei viel datensätze--
 /*
-1: "3 Indexes dauer beurteilen" Skript ausführen und dauer notieren
-2: Skript für 100000 datensätze generieren ausführen
-3: "3 Indexes dauer beurteilen" Skript ausführen und dauer notieren
+1: Vorbereitung ausführen
+2: "3 Indexes dauer beurteilen" Skript ausführen und dauer notieren
+3: Skript für Index erstellen
+4: "3 Indexes dauer beurteilen" Skript ausführen und dauer notieren
 */
